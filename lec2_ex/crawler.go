@@ -103,6 +103,8 @@ func coordinator(ch chan []string, fetcher Fetcher) {
 
 func ConcurrentChannel(url string, fetcher Fetcher) {
 	ch := make(chan []string)
+	// If we remove the goroutine here, the function will block. Because sender of channels block
+	// until the receiver receives.
 	go func() {
 		ch <- []string{url}
 	}()
